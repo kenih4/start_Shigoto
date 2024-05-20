@@ -1,4 +1,4 @@
-rem 2024/5/20 SHIFT-JISに変更
+rem 2024/5/20 SHIFT-JISに変更　バッチで日本語認識させるため
 
 rem	SET TARGET_DIR=\\saclaopr18.spring8.or.jp\common\ V t g\2020 N x\   p  \
 rem	NET USE %TARGET_DIR% ses@sacla5712 /USER:sesoper
