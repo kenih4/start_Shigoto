@@ -56,6 +56,5 @@ copy \\saclaopr18.spring8.or.jp\common\シフト\2024年度\2024年度シフト表.xlsm C:\
 pause
 
 
-rem	start C:\me\bin\mail.exe
 start C:\me\bin\login_by_ChromeDriver_auto_update_chrmedriver.exe kenichi ribsgroup
 rem	pause
