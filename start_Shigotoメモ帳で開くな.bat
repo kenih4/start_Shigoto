@@ -1,5 +1,5 @@
 rem @echo off
-rem メモ帳で開くと文字化けしてしまうので注意
+rem ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽﾅ開?ｿｽ?ｿｽ?ｿｽﾆ包ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽﾄゑｿｽ?ｿｽﾜゑｿｽ?ｿｽﾌで抵ｿｽ?ｿｽ?ｿｽ
 rem 2024/5/20 SHIFT-JIS
 
 rem	SET TARGET_DIR=\\saclaopr18.spring8.or.jp\common\ V t g\2020 N x\   p  \
@@ -39,17 +39,18 @@ timeout 7
 
 rem	http://saclaopr19.spring8.or.jp/~logsearch/viewer/?SCSS/operation_log/2021/10/2021_10_02_shift3.htm
 copy \\saclaoprfs01.spring8.or.jp\log_note\SACLA\operation_log\%yyyy%\%mm%\%yyyy%_%mm%.xlsm C:\Users\kenic\Documents\operation_log_NEW\SACLA
-start C:\Users\kenic\Documents\operation_log_NEW\SACLA\%yyyy%_%mm%.xlsm
-timeout 50
-rem pause
-
 copy \\saclaoprfs01.spring8.or.jp\log_note\SCSs\operation_log\%yyyy%\%mm%\%yyyy%_%mm%_SCSS.xlsm C:\Users\kenic\Documents\operation_log_NEW\SCSS
-start C:\Users\kenic\Documents\operation_log_NEW\SCSS\%yyyy%_%mm%_SCSS.xlsm
-timeout 50
-
 copy \\saclaoprfs01.spring8.or.jp\log_note\SP8\operation_log\%yyyy%\%mm%\%yyyy%_%mm%.xlsm C:\Users\kenic\Documents\operation_log_NEW\SP8\%yyyy%_%mm%_SP8.xlsm
+
+
+start C:\Users\kenic\Documents\operation_log_NEW\SACLA\%yyyy%_%mm%.xlsm
+pause
+
+start C:\Users\kenic\Documents\operation_log_NEW\SCSS\%yyyy%_%mm%_SCSS.xlsm
+pause
 start C:\Users\kenic\Documents\operation_log_NEW\SP8\%yyyy%_%mm%_SP8.xlsm
-timeout 50
+
+
 
 rem	C:\me\bin\open_note.exe SACLA 0
 rem	timeout 50
@@ -74,27 +75,16 @@ rem start /b C:\me\bin\login_by_ChromeDriver_auto_update_chrmedriver.exe kenichi
 
 timeout 600
 
-copy \\saclaopr18.spring8.or.jp\common\シフト\2024年度\2024年度シフト表.xlsm C:\Users\kenic\Dropbox
+copy \\saclaopr18.spring8.or.jp\common\シフト\2025年度\2025年度シフト表.xlsm C:\Users\kenic\Dropbox
 if %ERRORLEVEL% neq 0 (
-    echo エラー: ファイルのコピーに失敗しました。
-    rem エラーログを記録する場合などの処理を追加
+    echo "Fail"
     exit /b %ERRORLEVEL%
 ) else (
-    echo ファイルのコピーが成功しました。
+    echo "OK"
 )
 
 
 
-
-rem Xcopyコマンドを使うときに、｢ファイル名ですか、またはディレクトリ名ですか｣と聞かれたときに「ディレクトリ名」で自動処理する方法ためにecho D
-echo D | xcopy /e /y \\saclaopr18.spring8.or.jp\common\運転状況集計\最新 C:\Users\kenic\Documents\BU\運転集計のバックアップ\最新_%yyyy%_%mm%_%dd%
-if %ERRORLEVEL% neq 0 (
-    echo エラー: ファイルのコピーに失敗しました。
-    rem エラーログを記録する場合などの処理を追加
-    exit /b %ERRORLEVEL%
-) else (
-    echo ファイルのコピーが成功しました。
-)
 
 
 
