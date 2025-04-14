@@ -44,10 +44,10 @@ copy \\saclaoprfs01.spring8.or.jp\log_note\SP8\operation_log\%yyyy%\%mm%\%yyyy%_
 
 
 start C:\Users\kenic\Documents\operation_log_NEW\SACLA\%yyyy%_%mm%.xlsm
-pause
+set /p dummy=‘±s‚·‚é‚É‚Í Enter ‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢...
 
 start C:\Users\kenic\Documents\operation_log_NEW\SCSS\%yyyy%_%mm%_SCSS.xlsm
-pause
+set /p dummy=‘±s‚·‚é‚É‚Í Enter ‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢...
 start C:\Users\kenic\Documents\operation_log_NEW\SP8\%yyyy%_%mm%_SP8.xlsm
 
 
@@ -95,7 +95,7 @@ rem "C:\Program Files (x86)\Dropbox\Client\Dropbox.exe"
 
 
 
-pause
+set /p dummy=‘±s‚·‚é‚É‚Í Enter ‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢...
 
 
 
