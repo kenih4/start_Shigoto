@@ -1,9 +1,4 @@
 rem @echo off
-rem ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽﾅ開?ｿｽ?ｿｽ?ｿｽﾆ包ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽ?ｿｽﾄゑｿｽ?ｿｽﾜゑｿｽ?ｿｽﾌで抵ｿｽ?ｿｽ?ｿｽ
-rem 2024/5/20 SHIFT-JIS
-
-rem	SET TARGET_DIR=\\saclaopr18.spring8.or.jp\common\ V t g\2020 N x\   p  \
-rem	NET USE %TARGET_DIR% ses@sacla5712 /USER:sesoper
 rem	START "" "%TARGET_DIR%"
 
 
@@ -44,10 +39,13 @@ copy \\saclaoprfs01.spring8.or.jp\log_note\SP8\operation_log\%yyyy%\%mm%\%yyyy%_
 
 
 start C:\Users\kenic\Documents\operation_log_NEW\SACLA\%yyyy%_%mm%.xlsm
+rem timeout /t -1
 set /p dummy=続行するには Enter を押してください...
 
 start C:\Users\kenic\Documents\operation_log_NEW\SCSS\%yyyy%_%mm%_SCSS.xlsm
+rem timeout /t -1
 set /p dummy=続行するには Enter を押してください...
+
 start C:\Users\kenic\Documents\operation_log_NEW\SP8\%yyyy%_%mm%_SP8.xlsm
 
 
@@ -84,6 +82,14 @@ if %ERRORLEVEL% neq 0 (
 )
 
 
+xcopy /E /I \\saclaopr18.spring8.or.jp\common\運転状況集計\最新 C:\Users\kenic\Documents\BU\運転集計のバックアップ\最新_%yyyy%_%mm%_%dd%
+if %ERRORLEVEL% neq 0 (
+    echo "Fail"
+    exit /b %ERRORLEVEL%
+) else (
+    echo "OK"
+)
+exit /b 0
 
 
 
