@@ -16,11 +16,12 @@ echo %mm%
 rem	TEST----------------------------------------------------------------------------------
 rem	----------------------------------------------------------------------------------
 
-
-
-
+rem 流行りのブックマークを開く
+python C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks\open_chrome_bookmarks.py
 
 start /b /max code C:\Users\kenic\Dropbox\gitdir\hikitsugi
+
+powershell -ExecutionPolicy Bypass -NoProfile -File "Open_teams.ps1"
 
 
 timeout 7
@@ -89,7 +90,6 @@ if %ERRORLEVEL% neq 0 (
 ) else (
     echo "OK"
 )
-exit /b 0
 
 
 
@@ -104,5 +104,5 @@ rem "C:\Program Files (x86)\Dropbox\Client\Dropbox.exe"
 set /p dummy=続行するには Enter を押してください...
 
 
-
-
+rem exit /b 0
+pause
