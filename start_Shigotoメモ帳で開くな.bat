@@ -16,11 +16,12 @@ echo %mm%
 rem	TEST----------------------------------------------------------------------------------
 rem	----------------------------------------------------------------------------------
 
-rem 流行りのブックマークを開く
-python C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks\open_chrome_bookmarks.py
+
 
 start /b /max code C:\Users\kenic\Dropbox\gitdir\hikitsugi
-
+rem C:\Users\kenic\OneDrive\Desktop\hikitsugi.lnk
+timeout /t 1
+ 
 powershell -ExecutionPolicy Bypass -NoProfile -File "Open_teams.ps1"
 
 
@@ -61,7 +62,15 @@ rem	C:\me\bin\open_note.exe SP8 0
 timeout 60
 call C:\me\open_web\open_web.bat
 
+timeout 10
 
+
+rem python C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks\open_chrome_bookmarks.py     mdaq_loader.html
+cd /d "C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks"
+start "" python -m http.server 8080
+timeout /t 5 >nul
+start "" http://localhost:8080/mdaq_loader.html
+rem pause
 
 
 
@@ -90,6 +99,7 @@ if %ERRORLEVEL% neq 0 (
 ) else (
     echo "OK"
 )
+exit /b 0
 
 
 
@@ -101,8 +111,5 @@ rem "C:\Program Files (x86)\Dropbox\Client\Dropbox.exe"
 
 
 
-set /p dummy=続行するには Enter を押してください...
-
-
-rem exit /b 0
+rem set /p dummy=続行するには Enter を押してください...
 pause
