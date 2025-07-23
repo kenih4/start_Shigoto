@@ -14,18 +14,18 @@ echo %mm%
 
 
 rem	TEST----------------------------------------------------------------------------------
+echo 現在のカレントフォルダは: %CD%
 rem	----------------------------------------------------------------------------------
 
 
+ 
+powershell -ExecutionPolicy Bypass -NoProfile -File "C:\Users\kenic\Dropbox\gitdir\start_Shigoto\Open_teams.ps1"
+pause
 
 start /b /max code C:\Users\kenic\Dropbox\gitdir\hikitsugi
 rem C:\Users\kenic\OneDrive\Desktop\hikitsugi.lnk
 timeout /t 1
- 
-powershell -ExecutionPolicy Bypass -NoProfile -File "Open_teams.ps1"
 
-
-timeout 7
 
 
 
