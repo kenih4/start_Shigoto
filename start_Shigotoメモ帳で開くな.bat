@@ -19,6 +19,17 @@ start /b /max code C:\Users\kenic\Dropbox\gitdir\hikitsugi
  
 powershell -ExecutionPolicy Bypass -NoProfile -File "C:\Users\kenic\Dropbox\gitdir\start_Shigoto\Open_teams.ps1"
 
+
+python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI_v2.py SACLA %yyyy% %mm% true
+pause
+python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI_v2.py SCSS %yyyy% %mm% true
+pause
+python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI_v2.py SP8 %yyyy% %mm% true
+
+
+rem~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GOTO SKIP
+
 rem	http://saclaopr19.spring8.or.jp/~logsearch/viewer/?SCSS/operation_log/2021/10/2021_10_02_shift3.htm
 copy \\saclaoprfs01.spring8.or.jp\log_note\SACLA\operation_log\%yyyy%\%mm%\%yyyy%_%mm%.xlsm C:\Users\kenic\Documents\operation_log_NEW\SACLA\%yyyy%_%mm%_SACLA.xlsm
 copy \\saclaoprfs01.spring8.or.jp\log_note\SCSs\operation_log\%yyyy%\%mm%\%yyyy%_%mm%_SCSS.xlsm C:\Users\kenic\Documents\operation_log_NEW\SCSS\%yyyy%_%mm%_SCSS.xlsm
@@ -30,8 +41,6 @@ set /p dummy=ë±çsÇ∑ÇÈÇ…ÇÕ Enter ÇâüÇµÇƒÇ≠ÇæÇ≥Ç¢...
 
 
 rem C:\Users\kenic\OneDrive\Desktop\hikitsugi.lnk
-
-
 
 
 
@@ -59,7 +68,8 @@ rem	timeout 50
 rem	C:\me\bin\open_note.exe SCSS 0
 rem	timeout 10
 rem	C:\me\bin\open_note.exe SP8 0
-
+rem~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:SKIP
 
 timeout 60
 call C:\me\open_web\open_web.bat
@@ -101,7 +111,7 @@ if %ERRORLEVEL% neq 0 (
 ) else (
     echo "OK"
 )
-exit /b 0
+
 
 
 
@@ -115,4 +125,7 @@ powershell -ExecutionPolicy Bypass -NoProfile -File "C:\Users\kenic\Dropbox\gitd
 
 
 rem set /p dummy=ë±çsÇ∑ÇÈÇ…ÇÕ Enter ÇâüÇµÇƒÇ≠ÇæÇ≥Ç¢...
+
+exit /b 0
+
 pause
