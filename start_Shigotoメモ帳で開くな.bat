@@ -18,13 +18,13 @@ rem	----------------------------------------------------------------------------
 start /b /max code C:\Users\kenic\Dropbox\gitdir\hikitsugi
  
 powershell -ExecutionPolicy Bypass -NoProfile -File "C:\Users\kenic\Dropbox\gitdir\start_Shigoto\Open_teams.ps1"
+set /p dummy=続行するには Enter を押してください...
 
-
-python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI_v2.py SACLA %yyyy% %mm% true
-pause
-python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI_v2.py SCSS %yyyy% %mm% true
-pause
-python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI_v2.py SP8 %yyyy% %mm% true
+python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI.py SACLA %yyyy% %mm% true
+set /p dummy=続行するには Enter を押してください...
+python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI.py SCSS %yyyy% %mm% true
+set /p dummy=続行するには Enter を押してください...
+python C:\Users\kenic\Dropbox\gitdir\CopyAndOpenExcel\download_LOGNOTE_GUI.py SP8 %yyyy% %mm% true
 
 
 rem~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,6 +123,13 @@ rem "C:\Program Files (x86)\Dropbox\Client\Dropbox.exe"
 rem ディスプレイの画面をオフにする時間を１分にする
 powershell -ExecutionPolicy Bypass -NoProfile -File "C:\Users\kenic\Dropbox\gitdir\start_Shigoto\SetScreenTimeout.ps1"
 
+
+rem ntfy-autostartのタスクが存在するか確認
+rem 管理者　powershell -ExecutionPolicy Bypass -File C:\Users\kenic\Dropbox\gitdir\setup-ntfy\setup-ntfy.ps1
+powershell -ExecutionPolicy Bypass Get-ScheduledTask -TaskName "ntfy-autostart"
+rem powershell -ExecutionPolicy Bypass C:\Users\kenic\Dropbox\gitdir\setup-ntfy\notify.ps1 -Message "start_Shigoto.bat: ntfy-autostartのタスクが存在するか確認"
+
+python C:\Users\kenic\Dropbox\gitdir\Oto_New\oto_monitor_gui.pyw
 
 rem set /p dummy=続行するには Enter を押してください...
 
