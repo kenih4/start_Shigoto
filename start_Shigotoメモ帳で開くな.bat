@@ -78,10 +78,10 @@ timeout 10
 
 
 rem python C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks\open_chrome_bookmarks.py     mdaq_loader.html
-cd /d "C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks"
-start "" python -m http.server 8080
-timeout /t 5 >nul
-start "" http://localhost:8080/mdaq_loader.html
+rem cd /d "C:\Users\kenic\Dropbox\gitdir\open_chrome_bookmarks"
+rem start "" python -m http.server 8080
+rem timeout /t 5 >nul
+rem start "" http://localhost:8080/mdaq_loader.html
 rem pause
 
 
@@ -93,9 +93,9 @@ rem start /b C:\me\bin\login_by_ChromeDriver_auto_update_chrmedriver.exe kenichi
 
 
 
-timeout 600
+rem timeout 600
 
-copy \\saclaopr18.spring8.or.jp\common\シフト\2025年度\2025年度シフト表.xlsm C:\Users\kenic\Dropbox
+copy \\saclaopr18.spring8.or.jp\common\シフト\2026年度\2026年度シフト表.xlsm C:\Users\kenic\Dropbox
 if %ERRORLEVEL% neq 0 (
     echo "Fail"
     exit /b %ERRORLEVEL%
@@ -104,7 +104,7 @@ if %ERRORLEVEL% neq 0 (
 )
 
 
-xcopy /E /I \\saclaopr18.spring8.or.jp\common\運転状況集計\最新 C:\Users\kenic\Documents\BU\運転集計のバックアップ\最新_%yyyy%_%mm%_%dd%
+xcopy /E /I \\saclaopr18.spring8.or.jp\common\運転状況集計\最新 D:\BU\運転集計のバックアップ\最新_%yyyy%_%mm%_%dd%
 if %ERRORLEVEL% neq 0 (
     echo "Fail"
     exit /b %ERRORLEVEL%
