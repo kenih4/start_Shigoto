@@ -1,4 +1,5 @@
 *.log
+*.ico
 log.txt
 test*
 open_log_note.bat

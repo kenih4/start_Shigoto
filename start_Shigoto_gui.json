@@ -1,0 +1,33 @@
+{
+  "enabled": {
+    "hikitsugi": true,
+    "teams": true,
+    "ln_sp8": true,
+    "ln_sacla": true,
+    "ln_scss": true,
+    "open_web": true,
+    "server_login": true,
+    "copy_shift": true,
+    "bu_unten": true,
+    "screen": true,
+    "hotspot": true,
+    "oto": true,
+    "mail": true
+  },
+  "keep_open": {
+    "hikitsugi": false,
+    "teams": false,
+    "ln_sp8": false,
+    "ln_sacla": false,
+    "ln_scss": false,
+    "open_web": true,
+    "server_login": true,
+    "copy_shift": true,
+    "bu_unten": true,
+    "screen": false,
+    "hotspot": false,
+    "oto": false,
+    "mail": true
+  },
+  "stop_on_fail": false
+}
