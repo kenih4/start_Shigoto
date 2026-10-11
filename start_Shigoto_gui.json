@@ -7,12 +7,12 @@
     "ln_scss": true,
     "open_web": true,
     "server_login": true,
-    "copy_shift": true,
-    "bu_unten": true,
     "screen": true,
-    "hotspot": true,
+    "hotspot": false,
     "oto": true,
-    "mail": true
+    "mail": true,
+    "copy_shift": true,
+    "bu_unten": true
   },
   "keep_open": {
     "hikitsugi": false,
@@ -20,14 +20,14 @@
     "ln_sp8": false,
     "ln_sacla": false,
     "ln_scss": false,
-    "open_web": true,
+    "open_web": false,
     "server_login": true,
-    "copy_shift": true,
-    "bu_unten": true,
     "screen": false,
     "hotspot": false,
     "oto": false,
-    "mail": true
+    "mail": true,
+    "copy_shift": true,
+    "bu_unten": true
   },
   "stop_on_fail": false
 }

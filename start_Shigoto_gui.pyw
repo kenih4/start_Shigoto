@@ -32,15 +32,10 @@ ITEMS = [
          cmd=f"{LOGNOTE} SACLA {{yyyy}} {{mm}} true"),
     dict(id="ln_scss", name="ログノート取得 SCSS", wait=True, pause_after=True,
          cmd=f"{LOGNOTE} SCSS {{yyyy}} {{mm}} true"),
-    dict(id="open_web", name="open_web.bat (Webページを開く)", wait=True,
-         keep_open=True, cmd=r"call C:\me\open_web\open_web.bat", cwd=r"C:\me\open_web"),
+    dict(id="open_web", name="open_web.ps1 (Webページを開く)", wait=True,
+         cmd=rf'{PS} "{GIT}\open_web\open_web.ps1"', cwd=rf"{GIT}\open_web"),
     dict(id="server_login", name="サーバー接続 (server_login.bat)", wait=False, keep_open=True,
          cmd=rf"{GIT}\Startup\server_login.bat"),
-    dict(id="copy_shift", name="2026年度シフト表.xlsm を Dropbox にコピー", wait=True,
-         cmd=r"copy \\saclaopr18.spring8.or.jp\common\シフト\2026年度\2026年度シフト表.xlsm C:\Users\kenic\Dropbox"),
-    dict(id="bu_unten", name="運転集計のバックアップ (xcopy)", wait=True,
-         cmd=r"xcopy /E /I \\saclaopr18.spring8.or.jp\common\運転状況集計\最新\SACLA "
-             r"D:\BU\運転集計のバックアップ\最新\SACLA_{yyyy}_{mm}_{dd}"),
     dict(id="screen", name="画面オフ時間を1分にする", wait=True,
          cmd=rf'{PS} "{BASE}\SetScreenTimeout.ps1"'),
     dict(id="hotspot", name="Wi-Fiホットスポット ON", wait=True,
@@ -49,6 +44,11 @@ ITEMS = [
          cmd=rf"python {GIT}\Oto_New\oto_monitor_gui.pyw"),
     dict(id="mail", name="Activeメール受信スクリプト起動", wait=False,
          cmd=rf"{PY} {GIT}\check_latest_mail_IMAP4\check_latest_mail_IMAP4.py kenichi ribsgroup"),
+    dict(id="copy_shift", name="2026年度シフト表.xlsm を Dropbox にコピー", wait=True,
+         cmd=r"copy \\saclaopr18.spring8.or.jp\common\シフト\2026年度\2026年度シフト表.xlsm C:\Users\kenic\Dropbox"),
+    dict(id="bu_unten", name="運転集計のバックアップ (xcopy)", wait=True,
+         cmd=r"xcopy /E /I \\saclaopr18.spring8.or.jp\common\運転状況集計\最新\SACLA "
+             r"D:\BU\運転集計のバックアップ\最新\SACLA_{yyyy}_{mm}_{dd}"),
 ]
 
 BG, FG, BG2, ACC = "#1e1e1e", "#d4d4d4", "#2d2d30", "#3c3c3f"
@@ -83,7 +83,7 @@ class App:
         self.btn_all = ttk.Button(top, text="▶ 有効な項目をすべて実行", command=self.run_all)
         self.btn_all.pack(side="left")
         self.btn_next = ttk.Button(top, text="⏭ 次へ進む", command=self.proceed.set,
-                                   state="disabled")
+                                   state="disabled", style="Next.TButton")
         self.btn_next.pack(side="left", padx=4)
         ttk.Button(top, text="中止", command=self.abort_all).pack(side="left", padx=4)
         ttk.Button(top, text="全選択", command=lambda: self.set_all(True)).pack(side="left", padx=(16, 0))
@@ -163,6 +163,10 @@ class App:
         st.configure("TButton", background=ACC, foreground=FG, borderwidth=0, padding=4)
         st.map("TButton", background=[("active", "#505055"), ("disabled", BG2)],
                foreground=[("disabled", "#777777")])
+        st.configure("Next.TButton", background=ACC, foreground=FG, borderwidth=0, padding=4)
+        st.configure("NextOn.TButton", background="#f0a030", foreground="#000000",
+                     borderwidth=0, padding=4)
+        st.map("NextOn.TButton", background=[("active", "#ffc060")])
         st.configure("TCheckbutton", background=BG, foreground=FG)
         st.map("TCheckbutton", background=[("active", BG)])
         # clam の既定は ☒ なので、チェック印のインジケータ画像を自前で描く
@@ -350,6 +354,10 @@ class App:
             lbl.configure(text=("● " if st == "実行中" else "") + st,
                           fg=COLORS.get(st, "#000000"))
         self.btn_next.configure(state="normal" if self.waiting else "disabled")
+        self._blink = not getattr(self, "_blink", False)
+        # 待機中は 0.5秒ごとにオレンジ/通常色を切り替えて点滅させる
+        self.btn_next.configure(style="NextOn.TButton" if self.waiting and self._blink
+                                else "Next.TButton")
         self.btn_all.configure(state="disabled" if self.running_all else "normal")
         self.root.after(500, self._refresh)
 
