@@ -8,6 +8,7 @@ import tempfile
 import threading
 import time
 import tkinter as tk
+from tkinter import messagebox
 from datetime import datetime
 from tkinter import ttk
 
@@ -45,8 +46,10 @@ ITEMS = [
     dict(id="mail", name="Activeメール受信スクリプト起動", wait=False,
          cmd=rf"{PY} {GIT}\check_latest_mail_IMAP4\check_latest_mail_IMAP4.py kenichi ribsgroup"),
     dict(id="copy_shift", name="2026年度シフト表.xlsm を Dropbox にコピー", wait=True,
+         keep_open=True, enter_close=True,
          cmd=r"copy \\saclaopr18.spring8.or.jp\common\シフト\2026年度\2026年度シフト表.xlsm C:\Users\kenic\Dropbox"),
     dict(id="bu_unten", name="運転集計のバックアップ (xcopy)", wait=True,
+         keep_open=True, enter_close=True,
          cmd=r"xcopy /E /I \\saclaopr18.spring8.or.jp\common\運転状況集計\最新\SACLA "
              r"D:\BU\運転集計のバックアップ\最新\SACLA_{yyyy}_{mm}_{dd}"),
 ]
@@ -239,7 +242,12 @@ class App:
             if os.path.exists(m):
                 os.remove(m)
             self.markers[it["id"]] = m
-            cmd = f'cmd /k "({cmd}) && (>{m} echo 0) || (>{m} echo 1)"'
+            run = f'({cmd}) && (>{m} echo 0) || (>{m} echo 1)'
+            if it.get("enter_close"):
+                # 終了後に Enter を入力するとターミナルが閉じる
+                cmd = f'cmd /c "{run} & echo. & set /p _=Press Enter to close..."'
+            else:
+                cmd = f'cmd /k "{run}"'
         # shell=True だと cmd が SW_HIDE で起動されターミナルが見えないため、
         # ターミナルを出す項目は shell=False で cmd を直接起動する
         flags = subprocess.CREATE_NEW_CONSOLE if term else subprocess.CREATE_NO_WINDOW
@@ -314,6 +322,7 @@ class App:
                 self.say(f'「次へ進む」を押すと再開します (待機中: {it["name"]} の後)')
                 self.proceed.clear()
                 self.waiting = True
+                self.root.after(0, self._ask_proceed, it["name"])
                 while not self.proceed.wait(0.3) and not self.abort:
                     pass
                 self.waiting = False
@@ -324,6 +333,19 @@ class App:
                 break
         self.say("=== 一括実行 終了 ===" if not self.abort else "=== 中止しました ===")
         self.running_all = False
+
+    def _ask_proceed(self, name):
+        """Yes/No で確認。Yes(既定。Enterのみで可)なら次へ進む。No なら待機を続ける"""
+        if not self.waiting:
+            return
+        self.root.deiconify()
+        self.root.lift()
+        self.root.focus_force()
+        msg = f"「{name}」が終了しました。" + chr(10) + "次へ進みますか?"
+        if messagebox.askyesno("次へ進みますか?", msg, default="yes", parent=self.root):
+            self.proceed.set()
+        else:
+            self.say("待機を続けます(「次へ進む」ボタンで再開)")
 
     def abort_all(self):
         self.abort = True
