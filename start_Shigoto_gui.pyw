@@ -77,6 +77,7 @@ class App:
         self.markers = {}        # id -> 終了コードを書き出すファイル(keep_open項目)
         self.proceed = threading.Event()
         self.waiting = False
+        self.blinking = False     # 「次へ進む」ボタンの点滅(Noを選ぶと止める)
 
         saved = self._load()
         # 設定ファイルの "keep_open" で項目ごとに、ターミナルを残すか(true)/終了後に閉じるか(false)を指定
@@ -322,6 +323,7 @@ class App:
                 self.say(f'「次へ進む」を押すと再開します (待機中: {it["name"]} の後)')
                 self.proceed.clear()
                 self.waiting = True
+                self.blinking = True
                 self.root.after(0, self._ask_proceed, it["name"])
                 while not self.proceed.wait(0.3) and not self.abort:
                     pass
@@ -345,6 +347,7 @@ class App:
         if messagebox.askyesno("次へ進みますか?", msg, default="yes", parent=self.root):
             self.proceed.set()
         else:
+            self.blinking = False
             self.say("待機を続けます(「次へ進む」ボタンで再開)")
 
     def abort_all(self):
@@ -378,7 +381,7 @@ class App:
         self.btn_next.configure(state="normal" if self.waiting else "disabled")
         self._blink = not getattr(self, "_blink", False)
         # 待機中は 0.5秒ごとにオレンジ/通常色を切り替えて点滅させる
-        self.btn_next.configure(style="NextOn.TButton" if self.waiting and self._blink
+        self.btn_next.configure(style="NextOn.TButton" if self.waiting and self.blinking and self._blink
                                 else "Next.TButton")
         self.btn_all.configure(state="disabled" if self.running_all else "normal")
         self.root.after(500, self._refresh)
